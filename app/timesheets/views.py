@@ -15,17 +15,17 @@ api = Api(timesheets)
 class TimesheetResource(Resource):
 
     def get(self):
-        clientId = request.args.get('clientId')
+        empId = request.args.get('empId')
         status = request.args.get('status')
         page = request.args.get('page')
         if(page is None):
             page = 1
-        current_app.logger.info('ClientId:%s, status:%s, page:%s',
-                                clientId, status, page)
+        current_app.logger.info('empId:%s, status:%s, page:%s',
+                                empId, status, page)
 
         query = Timesheet.query
-        if(clientId is not None):
-            query = query.filter(Timesheet.clientId == clientId)
+        if(empId is not None):
+            query = query.filter(Timesheet.empId == empId)
         if(status is not None):
             query = query.filter(Timesheet.status == status)
 #        timesheets = query.all()

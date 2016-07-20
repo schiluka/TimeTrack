@@ -33,6 +33,10 @@ def create_app(config_filename):
     # Init Flask-Mail
     mail.init_app(app)
 
+    @app.route('/ping')
+    def ping():
+        return 'pong'
+
     @app.route('/login')
     def login():
         return render_template('login.html')

@@ -1,3 +1,7 @@
+mysql -u root -p
+create user 'test'@'localhost' identified by 'test';
+GRANT ALL PRIVILEGES ON *.* TO 'test'@'localhost' WITH GRANT OPTION;
+mysql -u test -p test
 use tt;
 
 CREATE TABLE EMPLOYEE
@@ -53,7 +57,7 @@ ALTER TABLE TIMESHEET AUTO_INCREMENT = 10000;
 
 ALTER TABLE tablename MODIFY columnname INTEGER;
 
-INSERT INTO `timesheet` (`emp_id`, `fst_nam`, `lst_nam`, `ts_typ`, `appr_id`, `clnt_id`, `clnt_nam`, `ts_sta`, `wrk_hrs`, `total_hrs`, `start_dt`, `end_dt`, `sub_dt`, `appr_dt`)
+INSERT INTO TIMESHEET (`emp_id`, `fst_nam`, `lst_nam`, `ts_typ`, `appr_id`, `clnt_id`, `clnt_nam`, `ts_sta`, `wrk_hrs`, `total_hrs`, `start_dt`, `end_dt`, `sub_dt`, `appr_dt`)
 VALUES
   (120011, 'san1wer', 'san1ewr', 'Weekly', 120002, '10001', 'Clients', 'Submitted', '0,8,8,8,8,8,0', 40, '2016-06-07', '2016-06-14', '2016-07-14', NULL),
   (120012, 'san2666', 'san2', 'Weekly', 120002, '10034', 'Client1', 'Submitted', '0,8,8,8,8,8,0', 40, '2016-06-07', '2016-06-14', '2016-07-14', NULL),
@@ -62,15 +66,15 @@ VALUES
   (120015, 'san44', 'san5', 'Weekly', 120002, '10002', 'Client2', 'Approved', '0,8,8,8,8,8,0', 40, '2016-06-07', '2016-06-14', '2016-07-14', NULL),
   (120016, 'san63', 'san6dfg', 'Weekly', 120002, '10002', 'Client2', 'Approved', '0,8,8,8,8,8,0', 40, '2016-06-07', '2016-06-14', '2016-07-14', NULL);
 
-INSERT INTO `employee` (`emp_id`, `emp_email`, `emp_pswd`, `fst_nam`, `lst_nam`, `emp_typ`, `ts_typ`, `clnt_id`, `clnt_nam`, `emp_sta`, `proj_sta`, `visa_typ`, `visa_sta_dt`, `visa_end_dt`)
+INSERT INTO EMPLOYEE (`emp_email`, `emp_pswd`, `fst_nam`, `lst_nam`, `emp_typ`, `ts_typ`, `clnt_id`, `clnt_nam`, `emp_sta`, `proj_sta`, `visa_typ`, `visa_sta_dt`, `visa_end_dt`)
 VALUES
-  (1, 'san2@san2.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san2', 'san2', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL),
-  (120003, 'san@san.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san', 'san', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-  (120004, 'san4@san4.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san4', 'san4', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL),
-  (120005, 'san5@san5.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san5', 'san5', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL),
-  (120006, 'san6@san6.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san6', 'san6', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL),
-  (120007, 'san7@san7.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san7', 'san7', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL),
-  (120008, 'san8@san8.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san8', 'san8', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL);
+  ('san2@san2.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san2', 'san2', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL),
+  ('san@san.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san', 'san', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+  ('san4@san4.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san4', 'san4', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL),
+  ('san5@san5.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san5', 'san5', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL),
+  ('san6@san6.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san6', 'san6', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL),
+  ('san7@san7.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san7', 'san7', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL),
+  ('san8@san8.com', 'pbkdf2:sha1:1000$0H09oMb1$30afb473c25d939c21f7d35ce375768cb92d705a', 'san8', 'san8', 'Employee', 'Weekly', '1001', 'clien1', 'active', 'in', 'Citizen', NULL, NULL);
 
 
 

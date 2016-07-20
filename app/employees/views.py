@@ -14,7 +14,7 @@ api = Api(employees)
 class EmployeeResource(Resource):
 
     def get(self):
-        employees = Employee.query.all()
+        employees = Employee.query.order_by(Employee.firstName).all()
         results = schema.dump(employees, many=True).data
         return results
 
@@ -23,13 +23,27 @@ class EmployeeResource(Resource):
         try:
             schema.validate(raw_dict)
             request_dict = raw_dict['data']['attributes']
-            employee = Employee(request_dict['empEmail'], request_dict['empPassword'],
-                request_dict['firstName'], request_dict['lastName'],
-                request_dict['userType'], request_dict['timeSheetType'],
-                request_dict['clientId'], request_dict['clientName'],
-                request_dict['empStatus'], request_dict['projectStatus'],
-                request_dict['visaType'], request_dict['visaStartDate'],
-                request_dict['visaEndDate'])
+
+            visaStartDate = None
+            if('visaStartDate' in request_dict):
+                visaStartDate = request_dict['visaStartDate']
+            visaEndDate = None
+            if('visaEndDate' in request_dict):
+                visaEndDate = request_dict['visaEndDate']
+
+            employee = Employee(request_dict['empEmail'],
+                                request_dict['empPassword'],
+                                request_dict['firstName'],
+                                request_dict['lastName'],
+                                None,
+                                request_dict['empType'],
+                                request_dict['timesheetType'],
+                                request_dict['clientId'],
+                                request_dict['clientName'],
+                                request_dict['empStatus'],
+                                request_dict['projectStatus'],
+                                request_dict['visaType'],
+                                visaStartDate, visaEndDate)
 
             employee.add(employee)
             # Should not return password hash
@@ -51,8 +65,8 @@ class EmployeeResource(Resource):
 
 class EmployeeUpdateResource(Resource):
 
-    def get(self, empId):
-        employee = Employee.query.get_or_404(empId)
+    def get(self, id):
+        employee = Employee.query.get_or_404(id)
         result = schema.dump(employee).data
         return result
 
@@ -93,5 +107,5 @@ class EmployeeUpdateResource(Resource):
             return resp
 
 
-api.add_resource(EmployeeResource, '.json')
-api.add_resource(EmployeeUpdateResource, '/<int:id>.json')
+api.add_resource(EmployeeResource, '/')
+api.add_resource(EmployeeUpdateResource, '/<int:id>/')
