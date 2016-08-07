@@ -61,9 +61,9 @@ class TimesheetResource(Resource):
 
             timesheet.add(timesheet)
             # Should not return password hash
-            query = Timesheet.query.get(timesheet.id)
-            results = schema.dump(query).data
-            return results, 201
+            # query = Timesheet.query.get(timesheet.id)
+            # results = schema.dump(query).data
+            return 201
 
         except ValidationError as valerr:
             current_app.logger.error('ValidationError:%s', valerr)

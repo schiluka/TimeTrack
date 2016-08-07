@@ -26,6 +26,9 @@ def create_app(config_filename):
     from app.timesheets.views import timesheets
     app.register_blueprint(timesheets, url_prefix='/tt/timesheets')
 
+    from app.clients.views import clients
+    app.register_blueprint(clients, url_prefix='/tt/clients')
+
     from app.base_view import login1, mail
     from flask import render_template, send_from_directory
     import os
@@ -48,7 +51,8 @@ def create_app(config_filename):
 
     @app.route('/')
     def index():
-        return render_template('index.html')
+        # return render_template('index.html')
+        return app.send_static_file('index.html')
 
     # Auth API
     app.register_blueprint(login1, url_prefix='/tt/')

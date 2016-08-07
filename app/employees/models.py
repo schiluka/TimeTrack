@@ -44,7 +44,7 @@ class EmployeeSchema(Schema):
     not_blank = validate.Length(min=1, error='Field cannot be blank')
     id = fields.Integer(as_string=True, dump_only=True)
     empEmail = fields.Email(validate=not_blank)
-    empPassword = fields.String(validate=not_blank)
+    # empPassword = fields.String(validate=not_blank)
     firstName = fields.String(validate=not_blank)
     lastName = fields.String(validate=not_blank)
     empType = fields.String(validate=not_blank)
